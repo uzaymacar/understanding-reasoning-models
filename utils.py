@@ -18,6 +18,10 @@ mistake_phrases = [
     "i need to backtrack",
     "let me restart",
     "i made an error",
+    "i think i made a mistake",
+    "i think i made an error",
+    "that doesn't seem right",
+    "actually, i made a mistake in my calculation",
 ]
 
 correction_phrases = [
@@ -37,6 +41,7 @@ correction_phrases = [
     "oh, that's not", 
     "oh, that doesn't", 
     "oh, this doesn't",
+    "wait, that's not quite right",
 ]
 
 reconsideration_phrases = [
@@ -48,6 +53,9 @@ reconsideration_phrases = [
     "thinking again",
     "reconsidering", 
     "rethinking", 
+    "wait, let's determine",
+    "hmm, wait, let me check",
+    "hmm, i think i misunderstood the question",
 ]
 
 miscalculation_phrases = [
@@ -82,7 +90,9 @@ math_correction_phrases = [
     "let me solve this again", 
     "let me solve this differently",
     "let me approach this differently", 
-    "let me try a different approach"
+    "let me try a different approach",
+    "actually, let me double-check",
+    "wait, let me double-check",
 ]
 
 backtracking_phrases = (
