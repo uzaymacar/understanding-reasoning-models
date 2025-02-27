@@ -459,14 +459,3 @@ def create_balanced_backtracking_dataset(json_file_paths, output_path, n=100, se
     }
     
     return stats
-
-create_balanced_backtracking_dataset(
-    json_file_paths=[
-        "math_cot_results_t=0.6_mnt=1500_tp=0.92.json", 
-        "math_cot_results_t=0.7_mnt=1800_tp=0.92.json", 
-        "math_cot_results_t=0.8_mnt=3600_tp=0.92.json", 
-    ],
-    output_path="backtracking_dataset.json",
-    n=100,
-    seed=42
-)

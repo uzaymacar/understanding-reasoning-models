@@ -1,0 +1,162 @@
+[
+    {
+        "problem_id": 1,
+        "problem_text": "Find the derivative of f(x) = x^3 - 4x^2 + 5x - 2.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find the derivative of f(x) = x^3 - 4x^2 + 5x - 2. Solution: \n<think>\nTo find the derivative, I'll apply the power rule to each term.\nFor x^3, the derivative is 3x^2.\nFor -4x^2, the derivative is -4(2x) = -8x.\nFor 5x, the derivative is 5.\nFor -2, the derivative is 0.\nWait, I think I went wrong with the second term. Let me double-check. For -4x^2, applying the power rule gives -4 times 2x, which is -8x. So I was correct.\nCombining all terms: f'(x) = 3x^2 - 8x + 5.\n</think>\n\nTo find the derivative of f(x) = x^3 - 4x^2 + 5x - 2, I'll apply the power rule to each term.\n\nFor x^3: The derivative is 3x^2\nFor -4x^2: The derivative is -4(2x) = -8x\nFor 5x: The derivative is 5\nFor -2: The derivative is 0\n\nCombining all terms: f'(x) = 3x^2 - 8x + 5\n\nTherefore, \\boxed{f'(x) = 3x^2 - 8x + 5}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "I think I went wrong"
+    },
+    {
+        "problem_id": 2,
+        "problem_text": "Solve the equation 3x + 7 = 22.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Solve the equation 3x + 7 = 22. Solution: \n<think>\nTo solve the equation 3x + 7 = 22, I need to isolate x.\nFirst, subtract 7 from both sides:\n3x + 7 - 7 = 22 - 7\n3x = 15\nNow, divide both sides by 3:\n3x/3 = 15/3\nx = 5\nLet me verify: 3(5) + 7 = 15 + 7 = 22 ✓\n</think>\n\nTo solve the equation 3x + 7 = 22, I need to isolate x.\n\nStep 1: Subtract 7 from both sides.\n3x + 7 - 7 = 22 - 7\n3x = 15\n\nStep 2: Divide both sides by 3.\n3x ÷ 3 = 15 ÷ 3\nx = 5\n\nVerifying: 3(5) + 7 = 15 + 7 = 22 ✓\n\nTherefore, \\boxed{x = 5}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 3,
+        "problem_text": "Evaluate the limit: lim(x \\to 0) (sin(3x)/x).",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Evaluate the limit: lim(x \\to 0) (sin(3x)/x). Solution: \n<think>\nTo evaluate this limit, I'll use the fact that lim(x \\to 0) (sin(x)/x) = 1.\nFor sin(3x)/x, I need to rewrite it.\nsin(3x)/x = 3 · sin(3x)/(3x)\nIf I set u = 3x, then as x \\to 0, u \\to 0 as well.\nI think I made a mistake in my rewriting. Let me try again.\nsin(3x)/x = 3 · [sin(3x)/(3x)]\nNow as x \\to 0, the term sin(3x)/(3x) approaches 1 by the standard limit.\nSo lim(x \\to 0) (sin(3x)/x) = 3 · 1 = 3\n</think>\n\nTo evaluate lim(x \\to 0) (sin(3x)/x), I'll rewrite the expression to use the standard limit lim(x \\to 0) (sin(x)/x) = 1.\n\nI can rewrite sin(3x)/x as follows:\nsin(3x)/x = 3 · [sin(3x)/(3x)]\n\nLetting u = 3x, as x approaches 0, u also approaches 0.\n\nTherefore:\nlim(x \\to 0) (sin(3x)/x) = 3 · lim(u \\to 0) (sin(u)/u) = 3 · 1 = 3\n\nThe limit equals \\boxed{3}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "I think I made a mistake"
+    },
+    {
+        "problem_id": 4,
+        "problem_text": "Find the area of a circle with radius 5 cm.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find the area of a circle with radius 5 cm. Solution: \n<think>\nTo find the area of a circle, I use the formula: Area = π × r^2\nGiven that the radius is 5 cm, I can calculate:\nArea = π × 5^2\nArea = π × 25\nArea = 25π cm^2\nThis is approximately 25 × 3.14159 ≈ 78.54 cm^2.\n</think>\n\nTo find the area of a circle, I'll use the formula A = \\pi r^2.\n\nGiven information:\n- Radius (r) = 5 cm\n\nCalculating the area:\nA = \\pi × 5^2 = \\pi × 25 = 25\\pi cm^2\n\nThe area of the circle is \\boxed{25\\pi \\text{ cm}^2} or approximately \\boxed{78.54 \\text{ cm}^2}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 5,
+        "problem_text": "If sin(\\theta) = 0.6, find cos(\\theta).",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: If sin(\\theta) = 0.6, find cos(\\theta). Solution: \n<think>\nI know that sin^2(\\theta) + cos^2(\\theta) = 1, which is the Pythagorean identity.\nGiven: sin(\\theta) = 0.6\nUsing the identity:\nsin^2(\\theta) + cos^2(\\theta) = 1\n(0.6)^2 + cos^2(\\theta) = 1\n0.36 + cos^2(\\theta) = 1\ncos^2(\\theta) = 0.64\ncos(\\theta) = ±√0.64 = ±0.8\nWait, let's determine the sign. Since sin(\\theta) = 0.6 is positive, \\theta is in the first or second quadrant. In the first quadrant, cos(\\theta) is positive; in the second, it's negative. Without additional information, both values are possible, but if we assume \\theta is in the first quadrant, then cos(\\theta) = 0.8.\n</think>\n\nTo find cos(\\theta) when sin(\\theta) = 0.6, I'll use the Pythagorean identity: sin^2(\\theta) + cos^2(\\theta) = 1.\n\nStep 1: Substitute the given value.\nsin^2(\\theta) + cos^2(\\theta) = 1\n(0.6)^2 + cos^2(\\theta) = 1\n0.36 + cos^2(\\theta) = 1\ncos^2(\\theta) = 0.64\n\nStep 2: Find cos(\\theta).\ncos(\\theta) = \\pm\\sqrt{0.64} = \\pm 0.8\n\nSince sin(\\theta) = 0.6 is positive, \\theta is in either the first or second quadrant. Without additional information, both cos(\\theta) = 0.8 and cos(\\theta) = -0.8 are possible solutions.\n\nAssuming \\theta is in the first quadrant: \\boxed{\\cos(\\theta) = 0.8}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "Wait, let's determine the sign"
+    },
+    {
+        "problem_id": 6,
+        "problem_text": "Expand and simplify: (2x + 3)(x - 4).",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Expand and simplify: (2x + 3)(x - 4). Solution: \n<think>\nTo expand (2x + 3)(x - 4), I'll use the distributive property:\n(2x + 3)(x - 4) = 2x(x - 4) + 3(x - 4)\n= 2x^2 - 8x + 3x - 12\n= 2x^2 - 5x - 12\n</think>\n\nTo expand (2x + 3)(x - 4), I'll use the distributive property to multiply each term.\n\nStep 1: Multiply each term of the first parenthesis by each term of the second.\n(2x + 3)(x - 4) = 2x·x + 2x·(-4) + 3·x + 3·(-4)\n= 2x^2 - 8x + 3x - 12\n\nStep 2: Combine like terms.\n2x^2 - 8x + 3x - 12 = 2x^2 - 5x - 12\n\nTherefore, the expanded and simplified expression is \\boxed{2x^2 - 5x - 12}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 7,
+        "problem_text": "Solve the inequality: 2x - 5 > 3x + 2.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Solve the inequality: 2x - 5 > 3x + 2. Solution: \n<think>\nTo solve the inequality 2x - 5 > 3x + 2, I'll rearrange to isolate x.\nSubtracting 3x from both sides:\n2x - 5 - 3x > 3x + 2 - 3x\n-x - 5 > 2\nAdding 5 to both sides:\n-x - 5 + 5 > 2 + 5\n-x > 7\nMultiplying both sides by -1 (which reverses the inequality):\nx < -7\nI think I made a calculation error. Let me check again.\n2x - 3x = -x, so -x - 5 > 2 is correct.\nThen -x > 7, so x < -7 is indeed the answer.\n</think>\n\nTo solve the inequality 2x - 5 > 3x + 2, I'll rearrange terms to isolate x.\n\nStep 1: Subtract 3x from both sides.\n2x - 5 - 3x > 3x + 2 - 3x\n-x - 5 > 2\n\nStep 2: Add 5 to both sides.\n-x - 5 + 5 > 2 + 5\n-x > 7\n\nStep 3: Multiply both sides by -1 (which reverses the inequality).\nx < -7\n\nTherefore, the solution is \\boxed{x < -7}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "I think I made a calculation error"
+    },
+    {
+        "problem_id": 8,
+        "problem_text": "Find the indefinite integral of f(x) = 3x^2 - 2x + 5.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find the indefinite integral of f(x) = 3x^2 - 2x + 5. Solution: \n<think>\nTo find the indefinite integral of f(x) = 3x^2 - 2x + 5, I need to integrate each term separately.\nFor 3x^2, the integral is 3(x^3/3) = x^3.\nFor -2x, the integral is -2(x^2/2) = -x^2.\nFor 5, the integral is 5x.\nCombining these results and adding the constant of integration C:\n∫f(x)dx = x^3 - x^2 + 5x + C\n</think>\n\nTo find the indefinite integral of f(x) = 3x^2 - 2x + 5, I integrate each term separately.\n\nFor the first term: \n∫3x^2 dx = 3∫x^2 dx = 3(x^3/3) = x^3\n\nFor the second term: \n∫-2x dx = -2∫x dx = -2(x^2/2) = -x^2\n\nFor the third term: \n∫5 dx = 5x\n\nAdding these terms and including the constant of integration:\n∫(3x^2 - 2x + 5)dx = x^3 - x^2 + 5x + C\n\nThe indefinite integral is \\boxed{x^3 - x^2 + 5x + C}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 9,
+        "problem_text": "Find all values of x that satisfy the equation |x - 3| = 7.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find all values of x that satisfy the equation |x - 3| = 7. Solution: \n<think>\nTo solve |x - 3| = 7, I need to consider two cases:\nCase 1: When (x - 3) ≥ 0, then |x - 3| = (x - 3)\nSo, x - 3 = 7\nx = 10\nSince 10 - 3 = 7 > 0, this satisfies our condition.\n\nCase 2: When (x - 3) < 0, then |x - 3| = -(x - 3) = 3 - x\nSo, 3 - x = 7\n-x = 4\nx = -4\nSince -4 - 3 = -7 < 0, this satisfies our condition.\n\nSo, the solutions are x = 10 and x = -4.\n</think>\n\nTo solve |x - 3| = 7, I need to consider two cases based on the absolute value definition.\n\nCase 1: When (x - 3) ≥ 0 (meaning x ≥ 3)\n|x - 3| = (x - 3) = 7\nx - 3 = 7\nx = 10\n\nCase 2: When (x - 3) < 0 (meaning x < 3)\n|x - 3| = -(x - 3) = 3 - x = 7\n3 - x = 7\n-x = 4\nx = -4\n\nVerifying both solutions:\nFor x = 10: |10 - 3| = |7| = 7 ✓\nFor x = -4: |-4 - 3| = |-7| = 7 ✓\n\nTherefore, the values of x that satisfy the equation are \\boxed{x = -4 \\text{ and } x = 10}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 10,
+        "problem_text": "A ball is thrown vertically upward with an initial velocity of 20 m/s. How high will the ball go?",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: A ball is thrown vertically upward with an initial velocity of 20 m/s. How high will the ball go? Solution: \n<think>\nTo find the maximum height, I'll use the kinematic equation: v^2 = v₀^2 + 2a(s - s₀)\nAt the highest point, the velocity is zero (v = 0). The initial velocity v₀ = 20 m/s, and acceleration due to gravity a = -9.8 m/s^2. If we set s₀ = 0, then s represents the maximum height.\n\nSubstituting into the equation:\n0 = (20)^2 + 2(-9.8)(s - 0)\n0 = 400 - 19.6s\n19.6s = 400\ns = 400/19.6\ns = 20.4...\n\nHmm, that doesn't seem right. Let me try a different approach.\nOh, I see the issue. I need to use the equation v^2 = v₀^2 + 2a(s - s₀) correctly.\nAt maximum height, v = 0. So:\n0 = (20)^2 + 2(-9.8)s\n0 = 400 - 19.6s\n19.6s = 400\ns = 400/19.6 ≈ 20.4 meters\n</think>\n\nTo find the maximum height of the ball, I'll use the kinematic equation relating velocity and displacement.\n\nGiven:\n- Initial velocity (v₀) = 20 m/s\n- Final velocity at maximum height (v) = 0 m/s\n- Acceleration due to gravity (a) = -9.8 m/s^2\n\nUsing the equation: v^2 = v₀^2 + 2a(s)\nWhere s is the maximum height.\n\n0^2 = 20^2 + 2(-9.8)s\n0 = 400 - 19.6s\n19.6s = 400\ns = 400/19.6 ≈ 20.41 m\n\nTherefore, the ball will reach a height of approximately \\boxed{20.4 \\text{ meters}}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "that doesn't seem right"
+    },
+    {
+        "problem_id": 11,
+        "problem_text": "Find the area of a triangle with sides of length 5 cm, 12 cm, and 13 cm.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find the area of a triangle with sides of length 5 cm, 12 cm, and 13 cm. Solution: \n<think>\nTo find the area of a triangle when all three sides are known, I can use Heron's formula.\nFirst, I need to calculate the semi-perimeter s: s = (a + b + c)/2\nFor this triangle, s = (5 + 12 + 13)/2 = 30/2 = 15 cm.\nNow, using Heron's formula: Area = \\sqrt{s(s-a)(s-b)(s-c)}\nArea = \\sqrt{15(15-5)(15-12)(15-13)}\nArea = \\sqrt{15 · 10 · 3 · 2}\nHmm, wait, let me check if this is a right triangle. Using the Pythagorean theorem:\n5^2 + 12^2 = 25 + 144 = 169 = 13^2\nOh, it is a right triangle! So I can use the simpler formula Area = (base × height)/2 = (5 × 12)/2 = 30 cm^2.\n</think>\n\nTo find the area of this triangle, I'll first determine if it's a right triangle by checking the Pythagorean theorem.\n\nChecking if 5^2, 12^2, and 13^2 satisfy a^2 + b^2 = c^2:\n5^2 + 12^2 = 25 + 144 = 169 = 13^2\n\nSince the Pythagorean theorem is satisfied, this is a right triangle with the right angle between the sides of length 5 cm and 12 cm.\n\nFor a right triangle, the area formula is:\nArea = (base × height)/2 = (5 × 12)/2 = 30 cm^2\n\nAlternatively, I could use Heron's formula:\ns = (5 + 12 + 13)/2 = 15 cm\nArea = \\sqrt{s(s-a)(s-b)(s-c)} = \\sqrt{15 · 10 · 3 · 2} = \\sqrt{900} = 30 cm^2\n\nThe area of the triangle is \\boxed{30 \\text{ cm}^2}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "Hmm, wait, let me check"
+    },
+    {
+        "problem_id": 12,
+        "problem_text": "Solve the quadratic equation: 2x^2 - 5x - 3 = 0",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Solve the quadratic equation: 2x^2 - 5x - 3 = 0. Solution: \n<think>\nI'll use the quadratic formula to solve this equation: x = (-b ± \\sqrt{b^2 - 4ac})/(2a).\nFor 2x^2 - 5x - 3 = 0, I have a = 2, b = -5, and c = -3.\nSubstituting these values:\nx = (-(-5) ± \\sqrt{(-5)^2 - 4(2)(-3)})/(2(2))\nx = (5 ± \\sqrt{25 + 24})/(4)\nx = (5 ± \\sqrt{49})/(4)\nx = (5 ± 7)/4\nSo, x = (5 + 7)/4 = 12/4 = 3 or x = (5 - 7)/4 = -2/4 = -1/2.\nLet me double-check by substituting these values back:\nFor x = 3: 2(3)^2 - 5(3) - 3 = 2(9) - 15 - 3 = 18 - 15 - 3 = 0 ✓\nFor x = -1/2: 2(-1/2)^2 - 5(-1/2) - 3 = 2(1/4) + 5/2 - 3 = 1/2 + 5/2 - 3 = 6/2 - 3 = 3 - 3 = 0 ✓\n</think>\n\nTo solve the quadratic equation 2x^2 - 5x - 3 = 0, I'll use the quadratic formula:\nx = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}\n\nIdentifying the coefficients:\na = 2, b = -5, c = -3\n\nSubstituting into the formula:\nx = \\frac{-(-5) \\pm \\sqrt{(-5)^2 - 4(2)(-3)}}{2(2)}\n\nx = \\frac{5 \\pm \\sqrt{25 + 24}}{4}\n\nx = \\frac{5 \\pm \\sqrt{49}}{4}\n\nx = \\frac{5 \\pm 7}{4}\n\nThis gives two solutions:\nx = \\frac{5 + 7}{4} = \\frac{12}{4} = 3\nx = \\frac{5 - 7}{4} = \\frac{-2}{4} = -\\frac{1}{2}\n\nVerification: Both solutions satisfy the original equation.\n\nTherefore, \\boxed{x = 3 \\text{ or } x = -\\frac{1}{2}}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 13,
+        "problem_text": "Find the value of log_3(27).",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find the value of log_3(27). Solution: \n<think>\nThe logarithm log_3(27) asks: to what power must I raise 3 to get 27?\nI know that 3^3 = 27, so log_3(27) = 3.\nActually, let me double-check this. 3^3 = 3 × 3 × 3 = 9 × 3 = 27. Yes, that's correct.\nSo, log_3(27) = 3.\n</think>\n\nTo find the value of log_3(27), I need to determine the power to which 3 must be raised to get 27.\n\nExpressing 27 as a power of 3:\n27 = 3^3\n\nSince 3^3 = 3 × 3 × 3 = 27, the logarithm equals the exponent.\n\nTherefore, \\boxed{\\log_3(27) = 3}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "Actually, let me double-check this"
+    },
+    {
+        "problem_id": 14,
+        "problem_text": "The price of a shirt decreases from $50 to $40. What is the percent decrease?",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: The price of a shirt decreases from $50 to $40. What is the percent decrease? Solution: \n<think>\nTo find the percent decrease, I need to find the amount of decrease and then divide it by the original price, and multiply by 100%.\nAmount of decrease = Original price - New price = $50 - $40 = $10\nPercent decrease = (Amount of decrease / Original price) × 100%\nPercent decrease = ($10 / $50) × 100% = 0.2 × 100% = 20%\n</think>\n\nTo find the percent decrease, I'll use the formula:\nPercent decrease = \\frac{\\text{Amount of decrease}}{\\text{Original price}} \\times 100\\%\n\nStep 1: Calculate the amount of decrease.\nAmount of decrease = Original price - New price = \\$50 - \\$40 = \\$10\n\nStep 2: Calculate the percent decrease.\nPercent decrease = \\frac{\\$10}{\\$50} \\times 100\\% = 0.2 \\times 100\\% = 20\\%\n\nTherefore, the price of the shirt decreased by \\boxed{20\\%}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 15,
+        "problem_text": "Simplify the expression: (3x^2y^3)^4 ÷ (6xy^2)^2",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Simplify the expression: (3x^2y^3)^4 ÷ (6xy^2)^2. Solution: \n<think>\nI'll simplify this expression using exponent rules. First, let me expand the expression:\n(3x^2y^3)^4 ÷ (6xy^2)^2\n\nExpanding the numerator: (3x^2y^3)^4 = 3^4 × (x^2)^4 × (y^3)^4 = 81 × x⁸ × y¹^2\n\nExpanding the denominator: (6xy^2)^2 = 6^2 × x^2 × (y^2)^2 = 36 × x^2 × y^4\n\nNow, dividing: (81 × x⁸ × y¹^2) ÷ (36 × x^2 × y^4) = (81/36) × x^(8-2) × y^(12-4) = (9/4) × x⁶ × y⁸\n\nWait, I made an error. Let me recalculate. 3^4 = 3 × 3 × 3 × 3 = 81, so the numerator is correct.\n\nFor the denominator: 6^2 = 6 × 6 = 36, so that part is also correct.\n\nSo the final answer is (9/4) × x⁶ × y⁸ = (9x⁶y⁸)/4\n</think>\n\nTo simplify (3x^2y^3)^4 ÷ (6xy^2)^2, I'll apply the exponent rules.\n\nStep 1: Expand the expressions using the power rule (a^m)^n = a^(m×n).\n(3x^2y^3)^4 = 3^4 × (x^2)^4 × (y^3)^4 = 3^4 × x^(2×4) × y^(3×4) = 81 × x⁸ × y¹^2\n(6xy^2)^2 = 6^2 × x^2 × (y^2)^2 = 36 × x^2 × y^4\n\nStep 2: Perform the division using the quotient rule a^m ÷ a^n = a^(m-n).\n(81 × x⁸ × y¹^2) ÷ (36 × x^2 × y^4)\n= (81/36) × x^(8-2) × y^(12-4)\n= (81/36) × x⁶ × y⁸\n\nStep 3: Simplify the coefficient.\n81/36 = 9/4\n\nTherefore, the simplified expression is \\boxed{\\frac{9x^6y^8}{4}}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "Wait, I made an error"
+    },
+    {
+        "problem_id": 16,
+        "problem_text": "A box contains 5 red balls, 3 blue balls, and 2 green balls. If two balls are drawn randomly without replacement, what is the probability that both are the same color?",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: A box contains 5 red balls, 3 blue balls, and 2 green balls. If two balls are drawn randomly without replacement, what is the probability that both are the same color? Solution: \n<think>\nFor both balls to be the same color, I need to draw either 2 red balls, 2 blue balls, or 2 green balls. Let me calculate the probability of each and then add them up.\n\nTotal number of balls = 5 + 3 + 2 = 10\nTotal ways to draw 2 balls from 10 = C(10,2) = 10!/(2! × 8!) = 45\n\nProbability of drawing 2 red balls = C(5,2)/C(10,2) = 10/45\nProbability of drawing 2 blue balls = C(3,2)/C(10,2) = 3/45\nProbability of drawing 2 green balls = C(2,2)/C(10,2) = 1/45\n\nTotal probability = 10/45 + 3/45 + 1/45 = 14/45\n</think>\n\nTo find the probability that both drawn balls are the same color, I need to find the probability of drawing 2 red balls, 2 blue balls, or 2 green balls, then add these probabilities.\n\nGiven information:\n- 5 red balls, 3 blue balls, 2 green balls (total of 10 balls)\n- 2 balls drawn without replacement\n\nStep 1: Find the total number of ways to draw 2 balls from 10 balls.\nTotal ways = C(10,2) = \\frac{10!}{2!(10-2)!} = \\frac{10 × 9}{2 × 1} = 45\n\nStep 2: Find the number of ways to draw 2 balls of each color.\nWays to draw 2 red balls = C(5,2) = \\frac{5 × 4}{2 × 1} = 10\nWays to draw 2 blue balls = C(3,2) = \\frac{3 × 2}{2 × 1} = 3\nWays to draw 2 green balls = C(2,2) = 1\n\nStep 3: Calculate the total probability.\nP(same color) = P(2 red) + P(2 blue) + P(2 green)\n= \\frac{10}{45} + \\frac{3}{45} + \\frac{1}{45} = \\frac{14}{45}\n\nTherefore, the probability is \\boxed{\\frac{14}{45}}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 17,
+        "problem_text": "Find the solution to the system of equations: 2x - 3y = 7 and 4x + 5y = 3.",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find the solution to the system of equations: 2x - 3y = 7 and 4x + 5y = 3. Solution: \n<think>\nI'll solve this system using elimination. Let me multiply the first equation by 2 to align the coefficients of x.\n\nFirst equation: 2x - 3y = 7\nMultiplying by 2: 4x - 6y = 14\n\nSecond equation: 4x + 5y = 3\n\nNow, I'll subtract the second equation from the modified first equation:\n4x - 6y = 14\n4x + 5y = 3\n--------------\n-11y = 11\n\nSolving for y: y = -1\n\nI think I made an error because 4x - 6y - (4x + 5y) should be -11y, not -10y. Let me redo this:\n4x - 6y - (4x + 5y) = 14 - 3\n4x - 6y - 4x - 5y = 11\n-11y = 11\ny = -1\n\nNow, I'll substitute y = -1 into one of the original equations to find x.\nUsing the first equation: 2x - 3(-1) = 7\n2x + 3 = 7\n2x = 4\nx = 2\n\nSo, the solution is (2, -1).\n</think>\n\nI'll solve this system of equations using the elimination method.\n\nThe system is:\n2x - 3y = 7  (Equation 1)\n4x + 5y = 3  (Equation 2)\n\nStep 1: Multiply Equation 1 by 2 to align the coefficients of x.\n4x - 6y = 14  (Equation 1')\n4x + 5y = 3   (Equation 2)\n\nStep 2: Subtract Equation 2 from Equation 1'.\n4x - 6y = 14\n-(4x + 5y = 3)\n-----------------\n-11y = 11\n\nStep 3: Solve for y.\ny = -1\n\nStep 4: Substitute y = -1 into Equation 1 to find x.\n2x - 3(-1) = 7\n2x + 3 = 7\n2x = 4\nx = 2\n\nVerification: Substituting x = 2, y = -1 into both equations confirms our solution.\n\nTherefore, the solution is \\boxed{(2, -1)}",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "I think I made an error"
+    },
+    {
+        "problem_id": 18,
+        "problem_text": "Find the sum of the infinite geometric series: 8 + 4 + 2 + 1 + ...",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: Find the sum of the infinite geometric series: 8 + 4 + 2 + 1 + ... Solution: \n<think>\nThis is an infinite geometric series with first term a = 8 and common ratio r = 4/8 = 1/2 (since each term is half the previous term).\n\nFor an infinite geometric series with |r| < 1, the sum is given by the formula:\nS = a/(1-r)\n\nSince |r| = |1/2| = 1/2 < 1, the series converges, and I can use this formula.\n\nS = 8/(1-1/2) = 8/(1/2) = 8 × 2 = 16\n\nSo, the sum of the infinite geometric series is 16.\n</think>\n\nTo find the sum of the infinite geometric series 8 + 4 + 2 + 1 + ..., I'll first identify the first term and common ratio.\n\nStep 1: Identify the first term (a) and common ratio (r).\na = 8\nr = 4/8 = 2/4 = 1/2\n\nEach term is multiplied by 1/2 to get the next term.\n\nStep 2: Use the formula for the sum of an infinite geometric series.\nFor |r| < 1, the sum is given by S = a/(1-r)\n\nSince |r| = 1/2 < 1, the series converges, and I can apply the formula:\nS = 8/(1-1/2) = 8/(1/2) = 8 × 2 = 16\n\nTherefore, the sum of the infinite geometric series is \\boxed{16}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    },
+    {
+        "problem_id": 19,
+        "problem_text": "The half-life of a radioactive substance is 5 days. If initially there are 80 grams of the substance, how much will remain after 15 days?",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: The half-life of a radioactive substance is 5 days. If initially there are 80 grams of the substance, how much will remain after 15 days? Solution: \n<think>\nThe half-life is the time it takes for half of the substance to decay. After each half-life, the amount of substance is halved.\n\nGiven information:\n- Half-life = 5 days\n- Initial amount = 80 grams\n- Time elapsed = 15 days\n\nTo find how many half-lives have passed, I divide the elapsed time by the half-life:\nNumber of half-lives = 15 days / 5 days = 3 half-lives\n\nAfter 3 half-lives, the amount remaining is:\nRemaining amount = Initial amount × (1/2)^(number of half-lives)\nRemaining amount = 80 × (1/2)^3 = 80 × 1/8 = 10 grams\n\nWait, let me double-check this calculation:\n80 × (1/2)^3 = 80 × (1/8) = 80/8 = 10 grams\n\nNo, that's not right. 80/8 is actually 10, not 20. So the remaining amount is 10 grams.\n</think>\n\nTo determine how much of the radioactive substance remains after 15 days, I need to use the half-life formula.\n\nGiven:\n- Half-life = 5 days\n- Initial amount = 80 grams\n- Time elapsed = 15 days\n\nStep 1: Calculate how many half-lives have passed.\nNumber of half-lives = Time elapsed ÷ Half-life = 15 days ÷ 5 days = 3 half-lives\n\nStep 2: Apply the decay formula.\nRemaining amount = Initial amount × (1/2)^(number of half-lives)\nRemaining amount = 80 grams × (1/2)^3\nRemaining amount = 80 grams × (1/8)\nRemaining amount = 10 grams\n\nAfter 15 days, \\boxed{10 \\text{ grams}} of the radioactive substance will remain.",
+        "is_correct": true,
+        "has_backtracking": true,
+        "backtracking_phrase": "Wait, let me double-check this calculation"
+    },
+    {
+        "problem_id": 20,
+        "problem_text": "What is the slope of the line passing through the points (-2, 5) and (4, -3)?",
+        "generated_cot": "Solve this math problem step by step. Put your final answer in \\boxed{}. Problem: What is the slope of the line passing through the points (-2, 5) and (4, -3)? Solution: \n<think>\nTo find the slope of a line passing through two points (x₁, y₁) and (x₂, y₂), I use the formula:\nSlope = (y₂ - y₁)/(x₂ - x₁)\n\nIn this case, the two points are (-2, 5) and (4, -3).\nSo, (x₁, y₁) = (-2, 5) and (x₂, y₂) = (4, -3).\n\nSlope = (-3 - 5)/(4 - (-2))\nSlope = -8/6\nSlope = -4/3\n</think>\n\nTo find the slope of a line passing through two points, I'll use the slope formula:\n\nSlope = \\frac{y_2 - y_1}{x_2 - x_1}\n\nGiven points: (-2, 5) and (4, -3)\n\nStep 1: Identify the coordinates.\n(x₁, y₁) = (-2, 5)\n(x₂, y₂) = (4, -3)\n\nStep 2: Substitute into the slope formula.\nSlope = \\frac{-3 - 5}{4 - (-2)} = \\frac{-8}{6} = \\frac{-4}{3}\n\nTherefore, the slope of the line is \\boxed{-\\frac{4}{3}}",
+        "is_correct": true,
+        "has_backtracking": false,
+        "backtracking_phrase": ""
+    }
+]
