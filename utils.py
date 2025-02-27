@@ -1,6 +1,7 @@
 import json
 import re
 from collections import Counter
+import random
 
 mistake_phrases = [
     "i made a mistake", 
@@ -110,6 +111,20 @@ def identify_backtracking(cot_text):
     
     return found_phrases
 
+def extract_boxed_answers(text):
+    """
+    Extract boxed answers from a text.
+    
+    Args:
+        text: The text to extract boxed answers from
+    
+    Returns:
+        List of boxed answers
+    """
+    boxed_pattern = r"\\boxed{([^}]*)}"
+    matches = re.findall(boxed_pattern, text)
+    return [match.strip() for match in matches]
+        
 def analyze_cot_results(json_file_path):
     """
     Analyze the Chain-of-Thought results from a saved JSON file.
@@ -163,12 +178,6 @@ def analyze_cot_results(json_file_path):
         # Extract boxed answers from both generated and ground truth
         generated_cot = result.get("generated_cot", "")
         ground_truth = result.get("ground_truth_solution", "")
-        
-        # Extract boxed answers
-        def extract_boxed_answers(text):
-            boxed_pattern = r"\\boxed{([^}]*)}"
-            matches = re.findall(boxed_pattern, text)
-            return [match.strip() for match in matches]
         
         generated_answers = extract_boxed_answers(generated_cot)
         ground_truth_answers = extract_boxed_answers(ground_truth)
@@ -287,3 +296,177 @@ def run_analysis(json_file_path):
     analysis = analyze_cot_results(json_file_path)
     print_analysis_report(analysis)
     return analysis
+
+
+def create_balanced_backtracking_dataset(json_file_paths, output_path, n=100, seed=42):
+    """
+    Create a balanced dataset with n/2 samples containing backtracking phrases that were solved correctly
+    and n/2 samples without backtracking phrases (randomly selected).
+    
+    Args:
+        json_file_paths: List of paths to JSON files with CoT results
+        output_path: Path to save the balanced dataset
+        n: Total number of samples in the dataset (default: 100)
+        seed: Random seed for reproducibility (default: 42)
+    
+    Returns:
+        Dictionary with dataset statistics
+    """
+    random.seed(seed)
+    
+    # Load and merge data from multiple JSON files
+    all_results = []
+    
+    for json_file_path in json_file_paths:
+        print(f"Loading data from {json_file_path}...")
+        with open(json_file_path, 'r') as f:
+            results = json.load(f)
+        all_results.extend(results)
+    
+    print(f"Loaded {len(all_results)} total problems from all files")
+    
+    # Filter out problems that ran out of tokens
+    completed_problems = []
+    for result in all_results:
+        generated_cot = result.get("generated_cot", "")        
+        generated_answers = extract_boxed_answers(generated_cot)
+        
+        # Skip problems that ran out of tokens (no boxed answer or empty boxed answer)
+        if not generated_answers or (len(generated_answers) == 1 and generated_answers[0] == ''):
+            continue
+        
+        completed_problems.append(result)
+    
+    print(f"Found {len(completed_problems)} completed problems")
+    
+    # Identify problems with backtracking that were solved correctly
+    backtracking_correct = []
+    no_backtracking = []
+    
+    for problem in completed_problems:
+        generated_cot = problem.get("generated_cot", "")
+        ground_truth = problem.get("ground_truth_solution", "")        
+        generated_answers = extract_boxed_answers(generated_cot)
+        ground_truth_answers = extract_boxed_answers(ground_truth)
+        
+        # Check if correct
+        is_correct = False
+        if generated_answers and ground_truth_answers:
+            # Normalize answers for comparison
+            norm_generated = [re.sub(r'\s+', '', ans.lower()) for ans in generated_answers]
+            norm_ground_truth = [re.sub(r'\s+', '', ans.lower()) for ans in ground_truth_answers]
+            
+            # Check for any match
+            for gen_ans in norm_generated:
+                if any(gen_ans == gt_ans for gt_ans in norm_ground_truth):
+                    is_correct = True
+                    break
+        
+        # Add is_correct flag to the problem
+        problem["is_correct"] = is_correct
+        
+        # Check for backtracking
+        backtracking_phrases = identify_backtracking(generated_cot)
+        
+        if backtracking_phrases and is_correct:
+            backtracking_correct.append(problem)
+        elif not backtracking_phrases:
+            no_backtracking.append(problem)
+    
+    print(f"Found {len(backtracking_correct)} problems with backtracking that were solved correctly")
+    print(f"Found {len(no_backtracking)} problems without backtracking")
+    
+    # Create balanced dataset ensuring unique problem IDs
+    half_n = n // 2
+    
+    # Sort by problem_id to ensure deterministic selection when we have duplicates
+    backtracking_correct.sort(key=lambda x: x.get("problem_id", ""))
+    no_backtracking.sort(key=lambda x: x.get("problem_id", ""))
+    
+    # Select unique problem IDs for backtracking samples
+    backtracking_samples = []
+    backtracking_ids_selected = set()
+    
+    # First try to get as many unique samples as possible
+    for problem in backtracking_correct:
+        problem_id = problem.get("problem_id", "Unknown")
+        if problem_id not in backtracking_ids_selected:
+            backtracking_samples.append(problem)
+            backtracking_ids_selected.add(problem_id)
+            if len(backtracking_samples) >= half_n:
+                break
+    
+    # If we don't have enough unique samples, use random sampling with replacement
+    if len(backtracking_samples) < half_n:
+        print(f"Warning: Only found {len(backtracking_samples)} unique backtracking problems. Using random sampling with replacement.")
+        additional_needed = half_n - len(backtracking_samples)
+        backtracking_samples.extend(random.choices(backtracking_correct, k=additional_needed))
+    
+    # Select unique problem IDs for no-backtracking samples
+    no_backtracking_samples = []
+    no_backtracking_ids_selected = set()
+    
+    # First try to get as many unique samples as possible
+    # Avoid problem IDs already selected for backtracking
+    for problem in no_backtracking:
+        problem_id = problem.get("problem_id", "Unknown")
+        if problem_id not in no_backtracking_ids_selected and problem_id not in backtracking_ids_selected:
+            no_backtracking_samples.append(problem)
+            no_backtracking_ids_selected.add(problem_id)
+            if len(no_backtracking_samples) >= half_n:
+                break
+    
+    # If we don't have enough unique samples, use random sampling with replacement
+    if len(no_backtracking_samples) < half_n:
+        print(f"Warning: Only found {len(no_backtracking_samples)} unique no-backtracking problems. Using random sampling with replacement.")
+        # Prioritize problems with IDs not in backtracking set
+        remaining_problems = [p for p in no_backtracking if p.get("problem_id", "Unknown") not in backtracking_ids_selected]
+        if not remaining_problems:
+            remaining_problems = no_backtracking
+        
+        additional_needed = half_n - len(no_backtracking_samples)
+        no_backtracking_samples.extend(random.choices(remaining_problems, k=additional_needed))
+    
+    # Combine samples
+    balanced_dataset = backtracking_samples + no_backtracking_samples
+    
+    # Add a flag indicating whether the sample contains backtracking
+    for i, sample in enumerate(balanced_dataset):
+        if i < half_n:
+            sample["has_backtracking"] = True
+        else:
+            sample["has_backtracking"] = False
+    
+    # Shuffle the dataset
+    random.shuffle(balanced_dataset)
+    
+    # Save the dataset
+    with open(output_path, 'w') as f:
+        json.dump(balanced_dataset, f, indent=2)
+    
+    print(f"Saved balanced dataset with {len(balanced_dataset)} samples to {output_path}")
+    
+    # Return statistics
+    stats = {
+        "total_samples": len(balanced_dataset),
+        "backtracking_samples": len(backtracking_samples),
+        "no_backtracking_samples": len(no_backtracking_samples),
+        "unique_backtracking_ids": len(backtracking_ids_selected),
+        "unique_no_backtracking_ids": len(no_backtracking_ids_selected),
+        "original_backtracking_correct_count": len(backtracking_correct),
+        "original_no_backtracking_count": len(no_backtracking),
+        "total_problems_processed": len(all_results)
+    }
+    
+    return stats
+
+create_balanced_backtracking_dataset(
+    json_file_paths=[
+        "math_cot_results_t=0.6_mnt=1500_tp=0.92.json", 
+        "math_cot_results_t=0.7_mnt=1800_tp=0.92.json", 
+        "math_cot_results_t=0.8_mnt=3600_tp=0.92.json", 
+    ],
+    output_path="backtracking_dataset.json",
+    n=100,
+    seed=42
+)
