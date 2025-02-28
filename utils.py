@@ -2,6 +2,7 @@ import json
 import re
 from collections import Counter
 import random
+import torch
 
 mistake_phrases = [
     "i made a mistake", 
@@ -469,3 +470,6 @@ def create_balanced_backtracking_dataset(json_file_paths, output_path, n=100, se
     }
     
     return stats
+
+def to_numpy(tensor):
+    return tensor.detach().cpu().numpy()
