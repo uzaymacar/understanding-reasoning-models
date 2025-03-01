@@ -2,7 +2,9 @@ import json
 import re
 from collections import Counter
 import random
-import torch
+from tqdm import tqdm
+from datasets import load_dataset
+import pandas as pd
 
 mistake_phrases = [
     "i made a mistake", 
@@ -447,6 +449,9 @@ def create_balanced_backtracking_dataset(json_file_paths, output_path, n=100, se
             sample["has_backtracking"] = True
         else:
             sample["has_backtracking"] = False
+        
+        # Add text field with the generated_cot content
+        sample["text"] = sample.get("generated_cot", "")
     
     # Shuffle the dataset
     random.shuffle(balanced_dataset)
@@ -473,3 +478,160 @@ def create_balanced_backtracking_dataset(json_file_paths, output_path, n=100, se
 
 def to_numpy(tensor):
     return tensor.detach().cpu().numpy()
+
+
+def identify_backtracking_positions(model, str_tokens, include_end_index=False, print_positions=False):
+    backtracking_positions = []
+    for phrase in backtracking_phrases:
+        phrase_tokens = model.to_str_tokens(phrase.lower())
+    
+        # Look for this phrase in the token sequence
+        for i in range(len(str_tokens) - len(phrase_tokens) + 1):
+            match = True
+            for j in range(len(phrase_tokens)):
+                if i+j >= len(str_tokens) or str_tokens[i+j].strip().lower() != phrase_tokens[j].strip().lower():
+                    match = False
+                    break
+            
+            if match:
+                if print_positions:
+                    print(f"Backtracking phrase '{phrase}' found at positions {i}-{i+len(phrase_tokens)-1}")
+                if include_end_index:
+                    backtracking_positions.append((i, i + len(phrase_tokens)))
+                else:
+                    backtracking_positions.extend(range(i, i + len(phrase_tokens)))
+                
+    return backtracking_positions
+
+def create_openr1_backtracking_dataset(output_path, backtracking_phrases):
+    """
+    Process the OpenR1-Math-220k dataset to identify examples with backtracking phrases
+    and create a new dataset with specified fields.
+    
+    Args:
+        output_path: Path to save the processed dataset
+        backtracking_phrases: List of phrases that indicate backtracking
+    
+    Returns:
+        Dictionary with dataset statistics
+    """
+    # Load the OpenR1 dataset
+    print("Loading OpenR1-Math-220k dataset...")
+    ds = load_dataset('open-r1/OpenR1-Math-220k', split='train')
+    
+    # Initialize the new dataset
+    processed_data = []
+    
+    # Statistics counters
+    total_examples = 0
+    examples_with_backtracking = 0
+    total_data_points = 0
+    
+    # Process each example in the dataset
+    print("Processing examples...")
+    for example in tqdm(ds):        
+        total_examples += 1
+        
+        # Extract the required fields
+        problem = example.get("problem", "")
+        solution = example.get("solution", "")
+        problem_type = example.get("problem_type", "")
+        question_type = example.get("question_type", "")
+        source = example.get("source", "")
+        uuid = example.get("uuid", "")
+        
+        # Get the generations and their corresponding metadata
+        generations = example.get("generations", [])
+        is_reasoning_complete = example.get("is_reasoning_complete", [])
+        correctness_math_verify = example.get("correctness_math_verify", [])
+        
+        # Skip if no generations
+        if not generations:
+            continue
+        
+        # Process each generation
+        has_backtracking_example = False
+        
+        for i, generation in enumerate(generations):
+            # Check if this generation has backtracking
+            has_backtracking = any(phrase.lower() in generation.lower() for phrase in backtracking_phrases)
+            
+            if has_backtracking:
+                has_backtracking_example = True
+            
+            # Create a data point for this generation
+            data_point = {
+                "problem": problem,
+                "solution": solution,
+                "problem_type": problem_type,
+                "question_type": question_type,
+                "source": source,
+                "uuid": uuid,
+                "has_backtracking": has_backtracking,
+                "text": generation,
+                "is_reasoning_complete": is_reasoning_complete[i] if i < len(is_reasoning_complete) else None,
+                "correctness_math_verify": correctness_math_verify[i] if i < len(correctness_math_verify) else None
+            }
+            
+            processed_data.append(data_point)
+            total_data_points += 1
+        
+        if has_backtracking_example:
+            examples_with_backtracking += 1
+    
+    # Save the processed dataset
+    print(f"Saving processed dataset with {total_data_points} data points to {output_path}...")
+    with open(output_path, 'w') as f:
+        json.dump(processed_data, f, indent=2)
+    
+    # Return statistics
+    stats = {
+        "total_examples_processed": total_examples,
+        "examples_with_backtracking": examples_with_backtracking,
+        "total_data_points": total_data_points,
+        "backtracking_percentage": f"{round((examples_with_backtracking / total_examples) * 100, 2)}%"
+    }
+    
+    print(f"Processing complete. Found {examples_with_backtracking} examples with backtracking out of {total_examples} total examples.")
+    return stats
+
+def list_flatten(nested_list):
+    return [x for y in nested_list for x in y]
+
+
+# A very handy function Neel wrote to get context around a feature activation
+def make_token_df(tokens, len_prefix=5, len_suffix=3, model=None):
+    str_tokens = [model.to_str_tokens(t) for t in tokens]
+    unique_token = [
+        [f"{s}/{i}" for i, s in enumerate(str_tok)] for str_tok in str_tokens
+    ]
+
+    context = []
+    prompt = []
+    pos = []
+    label = []
+    for b in range(tokens.shape[0]):
+        for p in range(tokens.shape[1]):
+            prefix = "".join(str_tokens[b][max(0, p - len_prefix) : p])
+            if p == tokens.shape[1] - 1:
+                suffix = ""
+            else:
+                suffix = "".join(
+                    str_tokens[b][p + 1 : min(tokens.shape[1] - 1, p + 1 + len_suffix)]
+                )
+            current = str_tokens[b][p]
+            context.append(f"{prefix}|{current}|{suffix}")
+            prompt.append(b)
+            pos.append(p)
+            label.append(f"{b}/{p}")
+    # print(len(batch), len(pos), len(context), len(label))
+    return pd.DataFrame(
+        dict(
+            str_tokens=list_flatten(str_tokens),
+            unique_token=list_flatten(unique_token),
+            context=context,
+            prompt=prompt,
+            pos=pos,
+            label=label,
+        )
+    )
